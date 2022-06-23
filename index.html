@@ -10,15 +10,91 @@
     <title>Bate Papo UOL</title>
 </head>
 <body>
-    <div class="topo">
-        <img src="./img/UOL Logo.svg" alt="bate papo uol">
-        <ion-icon name="people"></ion-icon>
+
+    <div class="telaDeEntrada hidden">
+        <div class="conteudo">
+            <img src="./img/UOL Logo.svg" alt="bate papo uol">
+            <input type="text" placeholder="Digite seu nome">
+            <div>Entrar</div>
+        </div>
     </div>
 
+    <div class="topo">
+        <img src="./img/UOL Logo.svg" alt="bate papo uol">
+        <ion-icon name="people" onclick="toggleBarraLateral()"></ion-icon>
+    </div>
+
+    <div class="chat">
+        <ul>
+            <li class = "mensagem-status">
+                <p>(09:21:45)</p>
+                <h1><b>João</b> entra na sala...</h1>
+            </li>
+            <li class = "mensagem-publica">
+                <p>(09:22:28)</p>
+                <h1><b>João</b> para Todos:  Bom dia</h1>
+            </li>
+            <li class = "mensagem-publica">
+                <p>(09:22:38)</p>
+                <h1><b>Maria</b> para <b>João</b>: Oi João :)</h1>
+            </li>
+            <li class = "mensagem-particular">
+                <p>(09:22:48)</p>
+                <h1><b>João</b> reservadamente para <b>Maria</b>:  Oi gatinha quer tc?</h1>
+            </li>
+            <li class = "mensagem-status">
+                <p>(09:22:58)</p>
+                <h1><b>Maria</b> sai da sala...</h1>
+            </li>
+        </ul>
+    </div>
+
+    <div class="background-aba-lateral hidden" onclick="toggleBarraLateral()"></div>
+
+    <div class="aba-lateral">
+        <div>
+            <p><b>Escolha um contato</b></p>
+            <p><b>para enviar mensagem:</b></p>
+        </div>
+        <ul class="usuarios-ativos">
+            <li onclick="configurarMensagem(this)">
+                <ion-icon name="people"></ion-icon>
+                <h3>Todos</h3>
+                <!-- check verde com opacity inicial = 0 -->
+                <ion-icon class="escolhido" name="checkmark-circle"></ion-icon>
+            </li>
+            <li onclick="configurarMensagem(this)">
+                <ion-icon name="people"></ion-icon>
+                <h3>João</h3>
+                <ion-icon class="" name="checkmark-circle"></ion-icon>
+            </li>
+            <li onclick="configurarMensagem(this)">
+                <ion-icon name="people"></ion-icon>
+                <h3>Maria</h3>
+            </li>
+        </ul>
+        <div>
+            <p><b>Escolha a visibilidade</b></p>
+        </div>
+        <ul>
+            <li onclick="configurarMensagem(this)">
+                <ion-icon name="people"></ion-icon>
+                <h3>Público</h3>
+                <ion-icon class="escolhido" name="checkmark-circle"></ion-icon>
+            </li>
+            <li onclick="configurarMensagem(this)">
+                <ion-icon name="people"></ion-icon>
+                <h3>Reservadamente</h3>
+            </li>
+        </ul>
+    </div>
 
     <div class="campo-inferior">
-        <input type="text" placeholder="Escreva aqui...">
-        <ion-icon name="paper-plane-outline"></ion-icon>
+        <div>
+            <input type="text" placeholder="Escreva aqui...">
+            <p>Enviando para Maria (reservadamente)</p>
+        </div>
+            <ion-icon name="paper-plane-outline"></ion-icon>
     </div>
 
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>

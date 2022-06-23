@@ -11,10 +11,14 @@ body {
     box-sizing: border-box;
 }
 
+b {
+    font-weight: 700;
+}
+
 .topo,
 .campo-inferior {
     height: 80px;
-    width: 100%;
+    width: 375px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -34,6 +38,7 @@ body {
 .topo ion-icon {
     width: 52px;
     height: 42px;
+    cursor: pointer;
 }
 
 .campo-inferior {
@@ -51,11 +56,12 @@ body {
 .campo-inferior input {
     border: none;
     height: 26px;
-    width: 250px;
+    width: 300px;
     font-weight: 400;
     font-size: 16px;
     color: #000000;
     line-height: 21px;
+    margin-top: 3px;
 }
 
 .campo-inferior input::placeholder {
@@ -64,4 +70,170 @@ body {
     font-size: 16px;
     color: #000000;
     line-height: 21px;
+}
+
+.campo-inferior div p {
+    font-weight: 300;
+    font-size: 14px;
+    color: #505050;
+    line-height: 25px;
+}
+
+.chat {
+    margin-top: 106px;
+    width: 100%;
+}
+
+.chat li {
+    width: 100%;
+    padding: 0 9px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    margin-top: 4px;
+    display: flex;
+}
+
+.chat li p {
+    color: #AAAAAA;
+    margin: 13px 7px 13px 0;
+}
+
+.chat li h1 {
+    margin: 13px 7px 13px 0;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.mensagem-status {
+    background-color: #DCDCDC;
+}
+
+.mensagem-publica {
+    background-color: #FFFFFF;
+}
+
+.mensagem-particular {
+    background-color: #FFDEDE;
+}
+
+.aba-lateral {
+    background-color: #FFFFFF;
+    width: 259px;
+    height: 667px;
+    position: fixed;
+    top: 0;
+    right: -259px;
+    z-index: 1;
+    padding: 0 20px;
+    transition: right .2s linear;
+}
+
+.aba-lateral-aberta {
+    right: 0;
+}
+
+.aba-lateral b {
+    font-size: 16px;
+    line-height: 18px;
+}
+
+.aba-lateral div {
+    height: 84px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.aba-lateral div:nth-child(3) {
+    height: 55px;
+    margin-top: 6px;
+}
+
+.aba-lateral li {
+    height: 36px;
+    display: flex;
+    align-items: center;
+}
+
+.aba-lateral ion-icon {
+    font-size: 24px;
+    margin-right: 5px;
+}
+
+h3 {
+    font-weight: 400;
+    font-size: 16px;
+    height: 15px;
+}
+
+.background-aba-lateral,
+.telaDeEntrada {
+    width: 375px;
+    height: 667px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: rgb(0, 0, 0, 0.6);
+}
+
+.telaDeEntrada {
+    background-color: #FFFFFF;
+    z-index: 2;
+}
+
+/* CORRIGIR POSIÇÃO*/
+.conteudo {
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 100px;
+}
+
+.conteudo img {
+    width: 130px;
+    height: 92px;
+}
+
+.conteudo input {
+    width: 261px;
+    height: 54px;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    border: 1px solid #D7D7D7;
+    text-align: center;
+}
+
+.conteudo input::placeholder {
+    font-weight: 400;
+    font-size: 18px;
+    color: #AEAEAE;
+    line-height: 25px;
+}
+
+/* CORRIGIR BOTÃO*/
+.conteudo div {
+    width: 100px;
+    height: 40px;
+    background-color: #AEAEAE;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+    font-size: 18px;
+    border-radius: 5%;
+}
+
+/* CORRIGIR CHECKMARK*/
+.escolhido {
+    opacity: 1;
+    color: red;
+}
+
+.hidden {
+    display: none;
 }
