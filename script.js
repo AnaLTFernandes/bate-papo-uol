@@ -12,9 +12,9 @@ function toggleBarraLateral() {
 function configurarMensagem(li) {
     let jaEscolhido = li.parentNode.querySelector(".escolhido");
     
-    // Por padrão, Todos sempre é escolhido
+    
     if (jaEscolhido !== li) {
         jaEscolhido.classList.remove("escolhido");
-        li.querySelector("h3").classList.add("escolhido");
+        li.querySelector(".check").classList.add("escolhido");
     }
 }

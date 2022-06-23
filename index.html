@@ -14,7 +14,7 @@
     <div class="telaDeEntrada hidden">
         <div class="conteudo">
             <img src="./img/UOL Logo.svg" alt="bate papo uol">
-            <input type="text" placeholder="Digite seu nome">
+            <input type="text" placeholder="Digite seu nome"></textarea>
             <div>Entrar</div>
         </div>
     </div>
@@ -58,19 +58,25 @@
         </div>
         <ul class="usuarios-ativos">
             <li onclick="configurarMensagem(this)">
-                <ion-icon name="people"></ion-icon>
-                <h3>Todos</h3>
-                <!-- check verde com opacity inicial = 0 -->
-                <ion-icon class="escolhido" name="checkmark-circle"></ion-icon>
+                <div>
+                    <ion-icon name="people"></ion-icon>
+                    <h3>Todos</h3>
+                </div>
+                <ion-icon class="escolhido check" name="checkmark-outline"></ion-icon>
             </li>
             <li onclick="configurarMensagem(this)">
-                <ion-icon name="people"></ion-icon>
-                <h3>João</h3>
-                <ion-icon class="" name="checkmark-circle"></ion-icon>
+                <div>
+                    <ion-icon name="person-circle"></ion-icon>
+                    <h3>João</h3>
+                </div>
+                <ion-icon class="check" name="checkmark-outline"></ion-icon>
             </li>
             <li onclick="configurarMensagem(this)">
-                <ion-icon name="people"></ion-icon>
-                <h3>Maria</h3>
+                <div>
+                    <ion-icon name="person-circle"></ion-icon>
+                    <h3>Maria</h3>
+                </div>
+                <ion-icon class="check" name="checkmark-outline"></ion-icon>
             </li>
         </ul>
         <div>
@@ -78,20 +84,26 @@
         </div>
         <ul>
             <li onclick="configurarMensagem(this)">
-                <ion-icon name="people"></ion-icon>
-                <h3>Público</h3>
-                <ion-icon class="escolhido" name="checkmark-circle"></ion-icon>
+                <div>
+                    <ion-icon name="lock-open"></ion-icon>
+                    <h3>Público</h3>
+                </div>
+                
+                <ion-icon class="escolhido check" name="checkmark-outline"></ion-icon>
             </li>
             <li onclick="configurarMensagem(this)">
-                <ion-icon name="people"></ion-icon>
-                <h3>Reservadamente</h3>
+                <div>
+                    <ion-icon name="lock-closed"></ion-icon>
+                    <h3>Reservadamente</h3>
+                </div>
+                <ion-icon class="check" name="checkmark-outline"></ion-icon>
             </li>
         </ul>
     </div>
 
     <div class="campo-inferior">
         <div>
-            <input type="text" placeholder="Escreva aqui...">
+            <textarea placeholder="Escreva aqui..."></textarea>
             <p>Enviando para Maria (reservadamente)</p>
         </div>
             <ion-icon name="paper-plane-outline"></ion-icon>

@@ -9,10 +9,15 @@ body {
 
 * {
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
 }
 
 b {
     font-weight: 700;
+}
+
+textarea {
+    resize: none;
 }
 
 .topo,
@@ -45,7 +50,7 @@ b {
     top: auto;
     bottom: 0;
     box-shadow: 0 -3px 10px 0 rgb(0, 0, 0, 0.1);
-    padding: 0 10px;
+    padding: 0 15px;
 }
 
 .campo-inferior ion-icon {
@@ -53,8 +58,8 @@ b {
     height: 27px;
 }
 
-.campo-inferior input {
-    border: none;
+.campo-inferior textarea {
+    border: black;
     height: 26px;
     width: 300px;
     font-weight: 400;
@@ -64,7 +69,7 @@ b {
     margin-top: 3px;
 }
 
-.campo-inferior input::placeholder {
+.campo-inferior textarea::placeholder {
     font-style: italic;
     font-weight: 400;
     font-size: 16px;
@@ -72,11 +77,15 @@ b {
     line-height: 21px;
 }
 
+.campo-inferior textarea:focus {
+    outline: none;
+}
+
 .campo-inferior div p {
     font-weight: 300;
     font-size: 14px;
     color: #505050;
-    line-height: 25px;
+    line-height: 18px;
 }
 
 .chat {
@@ -155,6 +164,23 @@ b {
     height: 36px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+}
+
+.aba-lateral li div {
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
+}
+
+li .check {
+    font-size: 18px;
+    color: #28BB25;
+    opacity: 0;
+}
+
+.check.escolhido {
+    opacity: 1;
 }
 
 .aba-lateral ion-icon {
@@ -184,15 +210,14 @@ h3 {
     z-index: 2;
 }
 
-/* CORRIGIR POSIÇÃO*/
 .conteudo {
-    height: 250px;
+    margin-top: 72px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    margin-top: 100px;
 }
+
 
 .conteudo img {
     width: 130px;
@@ -206,6 +231,8 @@ h3 {
     background-color: #FFFFFF;
     border: 1px solid #D7D7D7;
     text-align: center;
+    margin: 94px 0 15px 0;
+    font-size: 24px;
 }
 
 .conteudo input::placeholder {
@@ -215,23 +242,22 @@ h3 {
     line-height: 25px;
 }
 
-/* CORRIGIR BOTÃO*/
+.conteudo input:focus {
+    outline: none;
+}
+
 .conteudo div {
-    width: 100px;
-    height: 40px;
-    background-color: #AEAEAE;
+    width: 109px;
+    height: 45px;
+    border-radius: 9px;
+    background-color: #E7E7E7;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: 400;
     font-size: 18px;
-    border-radius: 5%;
-}
-
-/* CORRIGIR CHECKMARK*/
-.escolhido {
-    opacity: 1;
-    color: red;
+    line-height: 25px;
+    color: #696969;
 }
 
 .hidden {
