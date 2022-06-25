@@ -210,7 +210,9 @@ h3 {
     z-index: 2;
 }
 
-.conteudo {
+.conteudo,
+.entrar,
+.entrando {
     margin-top: 72px;
     display: flex;
     flex-direction: column;
@@ -218,13 +220,28 @@ h3 {
     justify-content: space-between;
 }
 
+.entrar,
+.entrando {
+    margin: 0;
+}
 
 .conteudo img {
     width: 130px;
     height: 92px;
 }
 
-.conteudo input {
+.entrando {
+    position: fixed;
+    top: 260px;
+}
+
+.entrando img {
+    width: auto;
+    height: 80px;
+    margin-bottom: 26px;
+}
+
+.entrar input {
     width: 261px;
     height: 54px;
     border-radius: 4px;
@@ -235,18 +252,18 @@ h3 {
     font-size: 20px;
 }
 
-.conteudo input::placeholder {
+.entrar input::placeholder {
     font-weight: 400;
     font-size: 18px;
     color: #AEAEAE;
     line-height: 25px;
 }
 
-.conteudo input:focus {
+.entrar input:focus {
     outline: none;
 }
 
-.conteudo div {
+.entrar div {
     width: 109px;
     height: 45px;
     border-radius: 9px;

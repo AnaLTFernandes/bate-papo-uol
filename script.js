@@ -5,6 +5,15 @@ let usuario;
 let mensagemEnviar;
 
 
+
+function entrandoNaSala() {
+    
+    document.querySelector(".telaDeEntrada .entrar").classList.toggle("hidden");
+    document.querySelector(".telaDeEntrada .entrando").classList.toggle("hidden");
+    entrarSala();
+}
+
+
 function entrarSala () {
 
     clearInterval(atualizarMensagens);
@@ -104,7 +113,7 @@ function mensagemTemplate(mensagem, type, index) {
             </li>`
         }
     }
-    
+
     if (type === "status") {
         return `
         <li class = "mensagem-status">
