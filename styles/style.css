@@ -2,7 +2,6 @@
 
 body {
     width: 375px;
-    height: 667px;
     background-color: #F3F3F3;
     font-family: 'Roboto', sans-serif;
 }
@@ -56,6 +55,7 @@ textarea {
 .campo-inferior ion-icon {
     width: 27px;
     height: 27px;
+    cursor: pointer;
 }
 
 .campo-inferior textarea {
@@ -89,8 +89,7 @@ textarea {
 }
 
 .chat {
-    margin: 106px 0;
-    width: 100%;
+    margin: 106px 0 90px 0;
 }
 
 .chat li {
@@ -165,6 +164,7 @@ textarea {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    cursor: pointer;
 }
 
 .aba-lateral li div {
@@ -232,7 +232,7 @@ h3 {
     border: 1px solid #D7D7D7;
     text-align: center;
     margin: 94px 0 15px 0;
-    font-size: 24px;
+    font-size: 20px;
 }
 
 .conteudo input::placeholder {
@@ -258,6 +258,7 @@ h3 {
     font-size: 18px;
     line-height: 25px;
     color: #696969;
+    cursor: pointer;
 }
 
 .hidden {

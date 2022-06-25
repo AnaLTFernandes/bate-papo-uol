@@ -11,11 +11,11 @@
 </head>
 <body>
 
-    <div class="telaDeEntrada hidden">
+    <div class="telaDeEntrada">
         <div class="conteudo">
             <img src="./img/UOL Logo.svg" alt="bate papo uol">
             <input type="text" placeholder="Digite seu nome"></textarea>
-            <div>Entrar</div>
+            <div onclick="entrarSala()">Entrar</div>
         </div>
     </div>
 
@@ -106,7 +106,7 @@
             <textarea placeholder="Escreva aqui..."></textarea>
             <p>Enviando para Maria (reservadamente)</p>
         </div>
-            <ion-icon name="paper-plane-outline"></ion-icon>
+            <ion-icon name="paper-plane-outline" onclick="enviarMensagem()"></ion-icon>
     </div>
 
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
