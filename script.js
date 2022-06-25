@@ -59,49 +59,75 @@ function removerTelaInicial() {
 
 function renderizarMensagens() {
     let ul = document.querySelector(".chat ul");
-    ul.innerHTML = '';
     let mensagem;
-    let tipoMensagem;
     let type;
+    ul.innerHTML = '';
 
     for (let i = 0; i < mensagens.length; i++) {
 
         mensagem = mensagens[i];
         type = mensagem.type;
 
-        if (type === "status") {
-            tipoMensagem = 'mensagem-status';
+        ul.innerHTML += mensagemTemplate(mensagem, type, i);
+    }
 
-            ul.innerHTML += `
-            <li class = "${tipoMensagem}">
+    document.querySelector(".chat .ultimaMsg").scrollIntoView();
+
+    buscarMensagens();
+    //atualizarMensagens = setInterval(buscarMensagens, 3000);
+}
+
+
+function mensagemTemplate(mensagem, type, index) {
+    if (index === 99) {
+        if (type === "status") {
+            return `
+            <li class = "mensagem-status ultimaMsg">
                 <p>(${mensagem.time})</p>
                 <h1><b>${mensagem.from}</b> ${mensagem.text}</h1>
             </li>`
         }
-
+    
         if (type === "message") {
-            tipoMensagem = 'mensagem-publica';
-
-            ul.innerHTML += `
-            <li class = "${tipoMensagem}">
+            return `
+            <li class = "mensagem-publica ultimaMsg">
                 <p>(${mensagem.time})</p>
                 <h1><b>${mensagem.from}</b> para <b>${mensagem.to}</b>: ${mensagem.text}</h1>
             </li>`
         }
-        
+    
         if (type === "private_message") {
-            tipoMensagem = 'mensagem-particular';
-
-            ul.innerHTML += `
-            <li class = "${tipoMensagem}">
+            return `
+            <li class = "mensagem-particular ultimaMsg">
                 <p>(${mensagem.time})</p>
                 <h1><b>${mensagem.from}</b> reservadamente para <b>${mensagem.to}</b>: ${mensagem.text}</h1>
             </li>`
         }
     }
+    
+    if (type === "status") {
+        return `
+        <li class = "mensagem-status">
+            <p>(${mensagem.time})</p>
+            <h1><b>${mensagem.from}</b> ${mensagem.text}</h1>
+        </li>`
+    }
 
-    buscarMensagens();
-    //atualizarMensagens = setInterval(buscarMensagens, 3000);
+    if (type === "message") {
+        return `
+        <li class = "mensagem-publica">
+            <p>(${mensagem.time})</p>
+            <h1><b>${mensagem.from}</b> para <b>${mensagem.to}</b>: ${mensagem.text}</h1>
+        </li>`
+    }
+
+    if (type === "private_message") {
+        return `
+        <li class = "mensagem-particular">
+            <p>(${mensagem.time})</p>
+            <h1><b>${mensagem.from}</b> reservadamente para <b>${mensagem.to}</b>: ${mensagem.text}</h1>
+        </li>`
+    }
 }
 
 
