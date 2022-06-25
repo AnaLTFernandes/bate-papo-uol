@@ -5,7 +5,6 @@ let usuario;
 let mensagemEnviar;
 
 
-
 function entrandoNaSala() {
     
     document.querySelector(".telaDeEntrada .entrar").classList.toggle("hidden");
@@ -16,7 +15,7 @@ function entrandoNaSala() {
 
 function entrarSala () {
 
-    clearInterval(atualizarMensagens);
+    //clearInterval(atualizarMensagens);
 
     const nome = document.querySelector(".telaDeEntrada input").value;
 
@@ -24,7 +23,9 @@ function entrarSala () {
         name: nome
     }
 
+
     enviarPedido();
+    enviarMensagemEnter();
 }
 
 
@@ -38,6 +39,7 @@ function enviarPedido() {
 function tratarErro(erro) {
     if (erro.response.status === 400) {
         alert("Já há um usuário online com esse nome. Por favor, insira outro.");
+        recarregarPagina();
         return;
     }
     alert("Ocorreu um erro. Por favor, tente novamente.")
@@ -48,7 +50,7 @@ function buscarMensagens() {
     const promise = axios.get("https://mock-api.driven.com.br/api/v6/uol/messages");
 
     setInterval(() => {axios.post("https://mock-api.driven.com.br/api/v6/uol/status", ({name: usuario.name}))}, 5000);
-    promise.catch(recarregarPagina);
+    promise.catch(tratarErro);
     promise.then(armazenarMensagens);
 }
 
@@ -140,6 +142,20 @@ function mensagemTemplate(mensagem, type, index) {
 }
 
 
+function enviarMensagemEnter() {
+    document.addEventListener("keydown", function(tecla) {
+        console.log(tecla)
+        
+        let teclaEnter = (tecla.key === 'Enter');
+        let mensagemValida = (document.querySelector(".campo-inferior textarea").value !== '');
+
+        if (teclaEnter && mensagemValida) {
+            enviarMensagem();
+        }
+    })
+}
+
+
 function enviarMensagem() {
 
     msgDigitada = document.querySelector(".campo-inferior textarea").value;
@@ -157,7 +173,7 @@ function enviarMensagem() {
 }
 
 
-function recarregarPagina(erro) {
+function recarregarPagina() {
     window.location.reload();
 }
 
