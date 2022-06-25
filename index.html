@@ -65,32 +65,12 @@
             <p><b>para enviar mensagem:</b></p>
         </div>
         <ul class="usuarios-ativos">
-            <li onclick="configurarMensagem(this)">
-                <div>
-                    <ion-icon name="people"></ion-icon>
-                    <h3>Todos</h3>
-                </div>
-                <ion-icon class="escolhido check" name="checkmark-outline"></ion-icon>
-            </li>
-            <li onclick="configurarMensagem(this)">
-                <div>
-                    <ion-icon name="person-circle"></ion-icon>
-                    <h3>João</h3>
-                </div>
-                <ion-icon class="check" name="checkmark-outline"></ion-icon>
-            </li>
-            <li onclick="configurarMensagem(this)">
-                <div>
-                    <ion-icon name="person-circle"></ion-icon>
-                    <h3>Maria</h3>
-                </div>
-                <ion-icon class="check" name="checkmark-outline"></ion-icon>
-            </li>
         </ul>
+        
         <div>
             <p><b>Escolha a visibilidade</b></p>
         </div>
-        <ul>
+        <ul class="visibilidade">
             <li onclick="configurarMensagem(this)">
                 <div>
                     <ion-icon name="lock-open"></ion-icon>
@@ -99,6 +79,7 @@
                 
                 <ion-icon class="escolhido check" name="checkmark-outline"></ion-icon>
             </li>
+
             <li onclick="configurarMensagem(this)">
                 <div>
                     <ion-icon name="lock-closed"></ion-icon>
@@ -112,7 +93,7 @@
     <div class="campo-inferior">
         <div>
             <textarea placeholder="Escreva aqui..."></textarea>
-            <p>Enviando para Maria (reservadamente)</p>
+            <p>Enviando para Todos (público)</p>
         </div>
             <ion-icon name="paper-plane-outline" onclick="enviarMensagem()"></ion-icon>
     </div>

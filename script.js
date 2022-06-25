@@ -1,28 +1,29 @@
 
-let mensagens = [];
 let atualizarMensagens;
-let usuario;
 let mensagemEnviar;
+let usuariosAtivos;
+let usuario;
+let destinatario = 'Todos';
+let tipoMensagem = 'message';
+let mensagens = [];
 
 
 function entrandoNaSala() {
     
     document.querySelector(".telaDeEntrada .entrar").classList.toggle("hidden");
     document.querySelector(".telaDeEntrada .entrando").classList.toggle("hidden");
+
     entrarSala();
 }
 
 
 function entrarSala () {
 
-    //clearInterval(atualizarMensagens);
-
     const nome = document.querySelector(".telaDeEntrada input").value;
 
     usuario = {
         name: nome
     }
-
 
     enviarPedido();
     enviarMensagemEnter();
@@ -42,7 +43,8 @@ function tratarErro(erro) {
         recarregarPagina();
         return;
     }
-    alert("Ocorreu um erro. Por favor, tente novamente.")
+    alert("Ocorreu um erro. Por favor, tente novamente.");
+    recarregarPagina();
 }
 
 
@@ -57,9 +59,11 @@ function buscarMensagens() {
 
 function armazenarMensagens(dados) {
     mensagens = dados.data;
+    usuariosAtivos = dados.data;
 
     removerTelaInicial();
     renderizarMensagens();
+    renderizarUsuarios();
 }
 
 
@@ -84,8 +88,43 @@ function renderizarMensagens() {
 
     document.querySelector(".chat .ultimaMsg").scrollIntoView();
 
-    buscarMensagens();
-    //atualizarMensagens = setInterval(buscarMensagens, 3000);
+    atualizarMensagens = setInterval(buscarMensagens, 3000);
+}
+
+
+function renderizarUsuarios() {
+
+    let ul = document.querySelector(".aba-lateral .usuarios-ativos");
+    let participantes = [];
+
+    ul.innerHTML = `
+        <li onclick="configurarMensagem(this)">
+            <div>
+                <ion-icon name="people"></ion-icon>
+                <h3>Todos</h3>
+            </div>
+            <ion-icon class="escolhido check" name="checkmark-outline"></ion-icon>
+        </li>
+    `;
+    
+    for (let i = 0; i < usuariosAtivos.length; i++) {
+        let participante = usuariosAtivos[i];
+
+        if (participante.type !== 'status' && !participantes.includes(participante.from)) {
+            participantes.push(participante);
+
+            ul.innerHTML += `
+                <li onclick="configurarMensagem(this)">
+                <div>
+                    <ion-icon name="person-circle"></ion-icon>
+                    <h3>${participante.from}</h3>
+                </div>
+                <ion-icon class="check" name="checkmark-outline"></ion-icon>
+                </li>
+            `;
+        }        
+    }
+
 }
 
 
@@ -144,8 +183,7 @@ function mensagemTemplate(mensagem, type, index) {
 
 function enviarMensagemEnter() {
     document.addEventListener("keydown", function(tecla) {
-        console.log(tecla)
-        
+
         let teclaEnter = (tecla.key === 'Enter');
         let mensagemValida = (document.querySelector(".campo-inferior textarea").value !== '');
 
@@ -162,14 +200,16 @@ function enviarMensagem() {
 
     mensagemEnviar = {
         from: usuario.name,
-        to: "Todos",
+        to: destinatario,
         text: msgDigitada,
-        type: "message"
+        type: tipoMensagem
     };
     
     let solicitacao = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages", mensagemEnviar);
     solicitacao.catch(recarregarPagina);
     solicitacao.then(buscarMensagens);
+
+    document.querySelector(".campo-inferior textarea").value = '';
 }
 
 
@@ -194,4 +234,24 @@ function configurarMensagem(li) {
         jaEscolhido.classList.remove("escolhido");
         li.querySelector(".check").classList.add("escolhido");
     }
+
+    atualizarEstado(li);
+}
+
+
+function atualizarEstado(li) {
+    let secaoUsuarios = document.querySelector(".usuarios-ativos .escolhido").parentElement;
+    let secaoVisibilidade = document.querySelector(".visibilidade .escolhido").parentElement;
+
+    destinatario = secaoUsuarios.querySelector("h3").innerHTML;
+    
+    tipoMensagem = secaoVisibilidade.querySelector("h3").innerHTML.toLowerCase();
+
+    document.querySelector(".campo-inferior div p").innerHTML = `Enviando para ${destinatario} (${tipoMensagem})`;
+
+    if (tipoMensagem === "público") {
+        tipoMensagem = "message";
+        return;
+    }
+    tipoMensagem = 'private_message';
 }

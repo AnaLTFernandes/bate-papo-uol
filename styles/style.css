@@ -278,6 +278,11 @@ h3 {
     cursor: pointer;
 }
 
+.usuarios-ativos {
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
 .hidden {
     display: none;
 }
