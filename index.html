@@ -10,20 +10,19 @@
     <title>Bate Papo UOL</title>
 </head>
 <body>
-
     <div class="telaDeEntrada">
         <div class="conteudo">
             <img src="./img/UOL Logo.svg" alt="bate papo uol">
+            
             <div class="entrar">
                 <input type="text" placeholder="Digite seu nome"></input>
-                <div onclick="entrandoNaSala()">Entrar</div>
+                <button onclick="entrarSala()">Entrar</button>
             </div>
+
             <div class="entrando hidden">
                 <img src="./img/spinner.gif">
                 <p>Entrando...</p>
-
             </div>
-            
         </div>
     </div>
 
@@ -37,22 +36,6 @@
             <li class = "mensagem-status">
                 <p>(09:21:45)</p>
                 <h1><b>João</b> entra na sala...</h1>
-            </li>
-            <li class = "mensagem-publica">
-                <p>(09:22:28)</p>
-                <h1><b>João</b> para Todos:  Bom dia</h1>
-            </li>
-            <li class = "mensagem-publica">
-                <p>(09:22:38)</p>
-                <h1><b>Maria</b> para <b>João</b>: Oi João :)</h1>
-            </li>
-            <li class = "mensagem-particular">
-                <p>(09:22:48)</p>
-                <h1><b>João</b> reservadamente para <b>Maria</b>:  Oi gatinha quer tc?</h1>
-            </li>
-            <li class = "mensagem-status">
-                <p>(09:22:58)</p>
-                <h1><b>Maria</b> sai da sala...</h1>
             </li>
         </ul>
     </div>
@@ -101,6 +84,7 @@
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
+    <script src="./axios.js"></script>
     <script src="./script.js"></script>
 </body>
 </html>
