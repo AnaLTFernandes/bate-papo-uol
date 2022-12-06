@@ -1,294 +1,299 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap");
 
 body {
-    width: 100%;
-    background-color: #F3F3F3;
-    font-family: 'Roboto', sans-serif;
+	width: 100%;
+	background-color: #f3f3f3;
+	font-family: "Roboto", sans-serif;
 }
 
 * {
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
+	box-sizing: border-box;
+	font-family: "Roboto", sans-serif;
 }
 
 b {
-    font-weight: 700;
+	font-weight: 700;
 }
 
 textarea {
-    resize: none;
+	resize: none;
 }
 
 .topo,
 .campo-inferior {
-    height: 80px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-    background-color: #FFFFFF;
-    box-shadow: 0 3px 10px 0 rgb(0, 0, 0, 0.1);
-    position: fixed;
-    top: 0;
-    left: 0;
+	height: 80px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 20px;
+	background-color: #ffffff;
+	box-shadow: 0 3px 10px 0 rgb(0, 0, 0, 0.1);
+	position: fixed;
+	top: 0;
+	left: 0;
 }
 
 .topo img {
-    width: 75px;
-    height: 53px;
+	width: 75px;
+	height: 53px;
 }
 
 .topo ion-icon {
-    width: 52px;
-    height: 42px;
-    cursor: pointer;
+	width: 52px;
+	height: 42px;
+	cursor: pointer;
 }
 
 .campo-inferior {
-    top: auto;
-    bottom: 0;
-    box-shadow: 0 -3px 10px 0 rgb(0, 0, 0, 0.1);
-    padding: 0 15px;
+	top: auto;
+	bottom: 0;
+	box-shadow: 0 -3px 10px 0 rgb(0, 0, 0, 0.1);
+	padding: 0 15px;
+}
+
+.campo-inferior div {
+	width: 100%;
+	margin: 0 10px 0 0;
 }
 
 .campo-inferior ion-icon {
-    width: 27px;
-    height: 27px;
-    cursor: pointer;
+	width: 27px;
+	height: 27px;
+	cursor: pointer;
 }
-/* Verificar largura */
+
 .campo-inferior textarea {
-    border: black;
-    height: 26px;
-    width: 300px;
-    font-weight: 400;
-    font-size: 16px;
-    color: #000000;
-    line-height: 21px;
-    margin-top: 3px;
+	border: black;
+	height: 26px;
+	width: 100%;
+	font-weight: 400;
+	font-size: 16px;
+	color: #000000;
+	line-height: 21px;
+	margin-top: 3px;
 }
 
 .campo-inferior textarea::placeholder {
-    font-style: italic;
-    font-weight: 400;
-    font-size: 16px;
-    color: #000000;
-    line-height: 21px;
+	font-style: italic;
+	font-weight: 400;
+	font-size: 16px;
+	color: #000000;
+	line-height: 21px;
 }
 
 .campo-inferior textarea:focus {
-    outline: none;
+	outline: none;
 }
 
 .campo-inferior div p {
-    font-weight: 300;
-    font-size: 14px;
-    color: #505050;
-    line-height: 18px;
+	font-weight: 300;
+	font-size: 14px;
+	color: #505050;
+	line-height: 18px;
 }
 
 .chat {
-    margin: 106px 0 90px 0;
+	margin: 106px 0 90px 0;
 }
 
 .chat li {
-    width: 100%;
-    padding: 0 9px;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 16px;
-    margin-top: 4px;
-    display: flex;
+	width: 100%;
+	padding: 0 9px;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 16px;
+	margin-top: 4px;
+	display: flex;
 }
 
 .chat li p {
-    color: #AAAAAA;
-    margin: 13px 7px 13px 0;
+	color: #aaaaaa;
+	margin: 13px 7px 13px 0;
 }
 
 .chat li h1 {
-    margin: 13px 7px 13px 0;
-    flex-wrap: wrap;
-    align-items: center;
+	margin: 13px 7px 13px 0;
+	flex-wrap: wrap;
+	align-items: center;
 }
 
 .mensagem-status {
-    background-color: #DCDCDC;
+	background-color: #dcdcdc;
 }
 
 .mensagem-publica {
-    background-color: #FFFFFF;
+	background-color: #ffffff;
 }
 
 .mensagem-particular {
-    background-color: #FFDEDE;
+	background-color: #ffdede;
 }
 
 /* verificar largura */
 .aba-lateral {
-    background-color: #FFFFFF;
-    width: 259px;
-    height: 667px;
-    position: fixed;
-    top: 0;
-    right: -259px;
-    z-index: 1;
-    padding: 0 20px;
-    transition: right .2s linear;
+	background-color: #ffffff;
+	width: 259px;
+	height: 667px;
+	position: fixed;
+	top: 0;
+	right: -259px;
+	z-index: 1;
+	padding: 0 20px;
+	transition: right 0.2s linear;
 }
 
 .aba-lateral-aberta {
-    right: 0;
+	right: 0;
 }
 
 .aba-lateral b {
-    font-size: 16px;
-    line-height: 18px;
+	font-size: 16px;
+	line-height: 18px;
 }
 
 .aba-lateral div {
-    height: 84px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+	height: 84px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .aba-lateral div:nth-child(3) {
-    height: 55px;
-    margin-top: 6px;
+	height: 55px;
+	margin-top: 6px;
 }
 
 .aba-lateral li {
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
+	height: 36px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	cursor: pointer;
 }
 
 .aba-lateral li div {
-    display: flex;
-    flex-direction: row;
-    height: fit-content;
+	display: flex;
+	flex-direction: row;
+	height: fit-content;
 }
 
 li .check {
-    font-size: 18px;
-    color: #28BB25;
-    opacity: 0;
+	font-size: 18px;
+	color: #28bb25;
+	opacity: 0;
 }
 
 .check.escolhido {
-    opacity: 1;
+	opacity: 1;
 }
 
 .aba-lateral ion-icon {
-    font-size: 24px;
-    margin-right: 5px;
+	font-size: 24px;
+	margin-right: 5px;
 }
 
 h3 {
-    font-weight: 400;
-    font-size: 16px;
-    height: 15px;
+	font-weight: 400;
+	font-size: 16px;
+	height: 15px;
 }
 
 .background-aba-lateral,
 .telaDeEntrada {
-    width: 100%;
-    height: 667px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    background-color: rgb(0, 0, 0, 0.6);
+	width: 100%;
+	height: 667px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	background-color: rgb(0, 0, 0, 0.6);
 }
 
 .telaDeEntrada {
-    background-color: #FFFFFF;
-    z-index: 2;
+	background-color: #ffffff;
+	z-index: 2;
 }
 
 .conteudo,
 .entrar,
 .entrando {
-    margin-top: 72px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+	margin-top: 72px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .entrar,
 .entrando {
-    width: 75%;
-    max-width: 400px;
-    margin: 0;
+	width: 75%;
+	max-width: 400px;
+	margin: 0;
 }
 
 .conteudo img {
-    width: 130px;
-    height: 92px;
+	width: 130px;
+	height: 92px;
 }
 
 .entrando {
-    position: fixed;
-    top: 260px;
+	position: fixed;
+	top: 260px;
 }
 
 .entrando img {
-    width: auto;
-    height: 80px;
-    margin-bottom: 26px;
+	width: auto;
+	height: 80px;
+	margin-bottom: 26px;
 }
 
 .entrar input {
-    width: 100%;
-    height: 54px;
-    border-radius: 4px;
-    background-color: #FFFFFF;
-    border: 1px solid #D7D7D7;
-    color: #696969;
-    text-align: center;
-    margin: 94px 0 15px 0;
-    font-size: 20px;
+	width: 100%;
+	height: 54px;
+	border-radius: 4px;
+	background-color: #ffffff;
+	border: 1px solid #d7d7d7;
+	color: #696969;
+	text-align: center;
+	margin: 94px 0 15px 0;
+	font-size: 20px;
 }
 
 .entrar input::placeholder {
-    font-weight: 400;
-    font-size: 18px;
-    color: #AEAEAE;
-    line-height: 25px;
+	font-weight: 400;
+	font-size: 18px;
+	color: #aeaeae;
+	line-height: 25px;
 }
 
 .entrar input:focus {
-    outline: none;
+	outline: none;
 }
 
 .entrar button {
-    width: 109px;
-    height: 45px;
-    border-radius: 9px;
-    border: none;
-    background-color: #E7E7E7;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 25px;
-    color: #696969;
-    cursor: pointer;
+	width: 109px;
+	height: 45px;
+	border-radius: 9px;
+	border: none;
+	background-color: #e7e7e7;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 25px;
+	color: #696969;
+	cursor: pointer;
 }
 
 .entrar button:hover {
-    filter: brightness(0.9);
+	filter: brightness(0.9);
 }
 
 .usuarios-ativos {
-    max-height: 400px;
-    overflow-y: scroll;
+	max-height: 400px;
+	overflow-y: scroll;
 }
 
 .hidden {
-    display: none;
+	display: none;
 }

@@ -1,8 +1,8 @@
 const BASE_URL = "https://mock-api.driven.com.br/api/v6/uol";
 let destinatario = "Todos";
 let tipoMensagem = "message";
-let mensagens = [];
 const usuario = {};
+let mensagens = [];
 let mensagemEnviar;
 let usuariosAtivos;
 
@@ -25,7 +25,9 @@ function enviarPedido() {
 
 function tratarErro(erro) {
 	if (erro.response.status === 400) {
-		alert("Já existe um usuário online com esse nome. Por favor, insira outro.");
+		alert(
+			"Já existe um usuário online com esse nome. Por favor, insira outro."
+		);
 		return recarregarPagina();
 	}
 	alert("Ocorreu um erro. Por favor, tente novamente.");
@@ -45,19 +47,21 @@ function atualizarMensagens() {
 }
 
 function buscarMensagens() {
-	const promise = axios.get(`${BASE_URL}/messages`);
-
-	promise.catch(tratarErro);
-	promise.then(armazenarMensagens);
+	axios.get(`${BASE_URL}/messages`).catch(tratarErro).then(armazenarMensagens);
 }
 
-function armazenarMensagens(dados) {
-	mensagens = dados.data;
-	usuariosAtivos = dados.data;
+function armazenarMensagens({ data }) {
+	const lastMessageTime = mensagens[mensagens.length - 1]?.time;
+	const lastMessageDataTime = data[data.length - 1].time;
 
-	removerTelaInicial();
-	renderizarMensagens();
-	renderizarUsuarios();
+	if (lastMessageTime !== lastMessageDataTime) {
+		mensagens = data;
+		usuariosAtivos = data;
+
+		removerTelaInicial();
+		renderizarMensagens();
+		renderizarUsuarios();
+	}
 }
 
 function removerTelaInicial() {
@@ -66,15 +70,24 @@ function removerTelaInicial() {
 
 function renderizarMensagens() {
 	let ul = document.querySelector(".chat ul");
-	let mensagem;
-	let type;
 	ul.innerHTML = "";
 
 	for (let i = 0; i < mensagens.length; i++) {
-		mensagem = mensagens[i];
-		type = mensagem.type;
+		const mensagem = mensagens[i];
+		const type = mensagem.type;
 
-		ul.innerHTML += mensagemTemplate(mensagem, type, i);
+		if (
+			(type === "private_message" &&
+				(mensagem.to === usuario.name || mensagem.from === usuario.name)) ||
+			type === "message" ||
+			type === "status"
+		) {
+			ul.innerHTML += mensagemTemplate({
+				mensagem,
+				type,
+				ehUltimaMensagem: i === mensagens.length - 1,
+			});
+		}
 	}
 
 	document.querySelector(".chat .ultimaMsg").scrollIntoView();
@@ -116,36 +129,12 @@ function renderizarUsuarios() {
 	}
 }
 
-function mensagemTemplate(mensagem, type, index) {
-	if (index === 99) {
-		if (type === "status") {
-			return `
-            <li class = "mensagem-status ultimaMsg">
-                <p>(${mensagem.time})</p>
-                <h1><b>${mensagem.from}</b> ${mensagem.text}</h1>
-            </li>`;
-		}
-
-		if (type === "message") {
-			return `
-            <li class = "mensagem-publica ultimaMsg">
-                <p>(${mensagem.time})</p>
-                <h1><b>${mensagem.from}</b> para <b>${mensagem.to}</b>: ${mensagem.text}</h1>
-            </li>`;
-		}
-
-		if (type === "private_message") {
-			return `
-            <li class = "mensagem-particular ultimaMsg">
-                <p>(${mensagem.time})</p>
-                <h1><b>${mensagem.from}</b> reservadamente para <b>${mensagem.to}</b>: ${mensagem.text}</h1>
-            </li>`;
-		}
-	}
+function mensagemTemplate({ mensagem, type, ehUltimaMensagem }) {
+	const classUltimaMensagem = ehUltimaMensagem ? "ultimaMsg" : "";
 
 	if (type === "status") {
 		return `
-        <li class = "mensagem-status">
+        <li class = "mensagem-status ${classUltimaMensagem}">
             <p>(${mensagem.time})</p>
             <h1><b>${mensagem.from}</b> ${mensagem.text}</h1>
         </li>`;
@@ -153,7 +142,7 @@ function mensagemTemplate(mensagem, type, index) {
 
 	if (type === "message") {
 		return `
-        <li class = "mensagem-publica">
+        <li class = "mensagem-publica ${classUltimaMensagem}">
             <p>(${mensagem.time})</p>
             <h1><b>${mensagem.from}</b> para <b>${mensagem.to}</b>: ${mensagem.text}</h1>
         </li>`;
@@ -161,7 +150,7 @@ function mensagemTemplate(mensagem, type, index) {
 
 	if (type === "private_message") {
 		return `
-        <li class = "mensagem-particular">
+        <li class = "mensagem-particular ${classUltimaMensagem}">
             <p>(${mensagem.time})</p>
             <h1><b>${mensagem.from}</b> reservadamente para <b>${mensagem.to}</b>: ${mensagem.text}</h1>
         </li>`;
