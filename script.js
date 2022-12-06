@@ -4,7 +4,6 @@ let tipoMensagem = "message";
 const usuario = {};
 let mensagens = [];
 let mensagemEnviar;
-let usuariosAtivos;
 
 function entrarSala() {
 	document.querySelector(".telaDeEntrada .entrar").classList.toggle("hidden");
@@ -40,10 +39,22 @@ function manterConexao() {
 	}, 5000);
 
 	atualizarMensagens();
+	atualizarParticipantes();
 }
 
 function atualizarMensagens() {
 	setInterval(buscarMensagens, 3000);
+}
+
+function atualizarParticipantes() {
+	setInterval(buscarParticipantes, 10000);
+}
+
+function buscarParticipantes() {
+	axios
+		.get(`${BASE_URL}/participants`)
+		.catch(tratarErro)
+		.then(renderizarUsuarios);
 }
 
 function buscarMensagens() {
@@ -56,11 +67,9 @@ function armazenarMensagens({ data }) {
 
 	if (lastMessageTime !== lastMessageDataTime) {
 		mensagens = data;
-		usuariosAtivos = data;
 
 		removerTelaInicial();
 		renderizarMensagens();
-		renderizarUsuarios();
 	}
 }
 
@@ -93,9 +102,8 @@ function renderizarMensagens() {
 	document.querySelector(".chat .ultimaMsg").scrollIntoView();
 }
 
-function renderizarUsuarios() {
+function renderizarUsuarios({ data: participantes }) {
 	let ul = document.querySelector(".aba-lateral .usuarios-ativos");
-	let participantes = [];
 
 	ul.innerHTML = `
         <li onclick="configurarMensagem(this)">
@@ -103,29 +111,26 @@ function renderizarUsuarios() {
                 <ion-icon name="people"></ion-icon>
                 <h3>Todos</h3>
             </div>
-            <ion-icon class="escolhido check" name="checkmark-outline"></ion-icon>
+            <ion-icon class="check ${
+							destinatario === "Todos" ? "escolhido" : ""
+						}" name="checkmark-outline"></ion-icon>
         </li>
     `;
 
-	for (let i = 0; i < usuariosAtivos.length; i++) {
-		let participante = usuariosAtivos[i];
+	for (let i = 0; i < participantes.length; i++) {
+		let participante = participantes[i];
 
-		if (
-			participante.type !== "status" &&
-			!participantes.includes(participante.from)
-		) {
-			participantes.push(participante);
-
-			ul.innerHTML += `
-                <li onclick="configurarMensagem(this)">
-                <div>
-                    <ion-icon name="person-circle"></ion-icon>
-                    <h3>${participante.from}</h3>
-                </div>
-                <ion-icon class="check" name="checkmark-outline"></ion-icon>
-                </li>
-            `;
-		}
+		ul.innerHTML += `
+            <li onclick="configurarMensagem(this)">
+            <div>
+                <ion-icon name="person-circle"></ion-icon>
+                <h3>${participante.name}</h3>
+            </div>
+            <ion-icon class="check ${
+							destinatario === participante.name ? "escolhido" : ""
+						}" name="checkmark-outline"></ion-icon>
+            </li>
+        `;
 	}
 }
 
@@ -194,10 +199,10 @@ function recarregarPagina() {
 }
 
 function toggleBarraLateral() {
-	let background = document.querySelector(".background-aba-lateral");
+	const background = document.querySelector(".background-aba-lateral");
 	background.classList.toggle("hidden");
 
-	let barraLateral = document.querySelector(".aba-lateral");
+	const barraLateral = document.querySelector(".aba-lateral");
 	barraLateral.classList.toggle("aba-lateral-aberta");
 }
 
@@ -209,20 +214,18 @@ function configurarMensagem(li) {
 		li.querySelector(".check").classList.add("escolhido");
 	}
 
-	atualizarEstado(li);
+	atualizarEstadosMensagem();
 }
 
-function atualizarEstado(li) {
-	let secaoUsuarios = document.querySelector(
-		".usuarios-ativos .escolhido"
-	).parentElement;
-	let secaoVisibilidade = document.querySelector(
-		".visibilidade .escolhido"
-	).parentElement;
+function atualizarEstadosMensagem() {
+	destinatario = document
+		.querySelector(".usuarios-ativos .escolhido")
+		.parentElement.querySelector("h3").innerHTML;
 
-	destinatario = secaoUsuarios.querySelector("h3").innerHTML;
-
-	tipoMensagem = secaoVisibilidade.querySelector("h3").innerHTML.toLowerCase();
+	tipoMensagem = document
+		.querySelector(".visibilidade .escolhido")
+		.parentElement.querySelector("h3")
+		.innerHTML.toLowerCase();
 
 	document.querySelector(
 		".campo-inferior div p"
@@ -232,5 +235,6 @@ function atualizarEstado(li) {
 		tipoMensagem = "message";
 		return;
 	}
+
 	tipoMensagem = "private_message";
 }
