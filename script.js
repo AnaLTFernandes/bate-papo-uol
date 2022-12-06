@@ -3,7 +3,6 @@ let destinatario = "Todos";
 let tipoMensagem = "message";
 const usuario = {};
 let mensagens = [];
-let mensagemEnviar;
 
 function entrarSala() {
 	document.querySelector(".telaDeEntrada .entrar").classList.toggle("hidden");
@@ -11,11 +10,11 @@ function entrarSala() {
 
 	usuario.name = document.querySelector(".telaDeEntrada input").value;
 
-	enviarPedido();
-	enviarMensagemEnter();
+	enviarPedidoParaEntrarNaSala();
+	enviarMensagemComEnterEvent();
 }
 
-function enviarPedido() {
+function enviarPedidoParaEntrarNaSala() {
 	axios
 		.post(`${BASE_URL}/participants`, usuario)
 		.catch(tratarErro)
@@ -162,34 +161,30 @@ function mensagemTemplate({ mensagem, type, ehUltimaMensagem }) {
 	}
 }
 
-function enviarMensagemEnter() {
+function enviarMensagemComEnterEvent() {
 	document.addEventListener("keydown", function (tecla) {
-		let teclaEnter = tecla.key === "Enter";
-		let mensagemValida =
-			document.querySelector(".campo-inferior textarea").value !== "";
-
-		if (teclaEnter && mensagemValida) {
+		if (tecla.key === "Enter") {
 			enviarMensagem();
 		}
 	});
 }
 
 function enviarMensagem() {
-	msgDigitada = document.querySelector(".campo-inferior textarea").value;
+	const mensagem = document.querySelector(".campo-inferior textarea").value;
 
-	mensagemEnviar = {
+	if (!mensagem) return;
+
+	const body = {
 		from: usuario.name,
 		to: destinatario,
-		text: msgDigitada,
+		text: mensagem,
 		type: tipoMensagem,
 	};
 
-	let solicitacao = axios.post(
-		"https://mock-api.driven.com.br/api/v6/uol/messages",
-		mensagemEnviar
-	);
-	solicitacao.catch(recarregarPagina);
-	solicitacao.then(buscarMensagens);
+	axios
+		.post(`${BASE_URL}/messages`, body)
+		.catch(recarregarPagina)
+		.then(buscarMensagens);
 
 	document.querySelector(".campo-inferior textarea").value = "";
 }
