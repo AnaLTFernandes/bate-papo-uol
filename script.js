@@ -22,11 +22,15 @@ function enviarPedidoParaEntrarNaSala() {
 }
 
 function tratarErro(erro) {
-	if (erro.response.status === 400) {
+	if (erro.response?.status === 400) {
 		alert(
 			"Já existe um usuário online com esse nome. Por favor, insira outro."
 		);
 		return recarregarPagina();
+	}
+	if (erro === "Mensagem inválida") {
+		alert("Por favor insira um texto antes enviar a mensagem.");
+        return;
 	}
 	alert("Ocorreu um erro. Por favor, tente novamente.");
 	recarregarPagina();
@@ -162,31 +166,35 @@ function mensagemTemplate({ mensagem, type, ehUltimaMensagem }) {
 }
 
 function enviarMensagemComEnterEvent() {
-	document.addEventListener("keydown", function (tecla) {
+    const input = document.querySelector(".campo-inferior input")
+
+	input.addEventListener("keydown", function (tecla) {
 		if (tecla.key === "Enter") {
-			enviarMensagem();
+            enviarMensagem();
 		}
 	});
 }
 
 function enviarMensagem() {
-	const mensagem = document.querySelector(".campo-inferior textarea").value;
+	const mensagem = document.querySelector(".campo-inferior input").value;
 
-	if (!mensagem) return;
+	if (mensagem) {
+		const body = {
+			from: usuario.name,
+			to: destinatario,
+			text: mensagem,
+			type: tipoMensagem,
+		};
 
-	const body = {
-		from: usuario.name,
-		to: destinatario,
-		text: mensagem,
-		type: tipoMensagem,
-	};
+		axios
+			.post(`${BASE_URL}/messages`, body)
+			.catch(recarregarPagina)
+			.then(buscarMensagens);
 
-	axios
-		.post(`${BASE_URL}/messages`, body)
-		.catch(recarregarPagina)
-		.then(buscarMensagens);
-
-	document.querySelector(".campo-inferior textarea").value = "";
+		document.querySelector(".campo-inferior input").value = "";
+	} else {
+		tratarErro("Mensagem inválida");
+	}
 }
 
 function recarregarPagina() {

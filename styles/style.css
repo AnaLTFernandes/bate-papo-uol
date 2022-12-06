@@ -63,7 +63,7 @@ textarea {
 	cursor: pointer;
 }
 
-.campo-inferior textarea {
+.campo-inferior input {
 	border: black;
 	height: 26px;
 	width: 100%;
@@ -74,7 +74,7 @@ textarea {
 	margin-top: 3px;
 }
 
-.campo-inferior textarea::placeholder {
+.campo-inferior input::placeholder {
 	font-style: italic;
 	font-weight: 400;
 	font-size: 16px;
@@ -82,7 +82,7 @@ textarea {
 	line-height: 21px;
 }
 
-.campo-inferior textarea:focus {
+.campo-inferior input:focus {
 	outline: none;
 }
 
@@ -130,7 +130,6 @@ textarea {
 	background-color: #ffdede;
 }
 
-/* verificar largura */
 .aba-lateral {
 	background-color: #ffffff;
 	width: 259px;
